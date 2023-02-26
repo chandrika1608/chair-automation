@@ -1,5 +1,6 @@
 package com.lixo.pos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,15 +23,17 @@ public class MenuItem {
     private BigDecimal price;
     
     // ... other properties
-    
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "menu_id")
     private Menu menu;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurants_id")
     private Restaurant restaurant;
     @OneToMany(mappedBy = "menuItem")
-    private Set<MenuItemCombo> options;
-    
+    private Set<MenuItemCombo> menuItemCombo;
+
     // ... getters and setters
 }

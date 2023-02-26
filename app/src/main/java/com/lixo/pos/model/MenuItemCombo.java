@@ -1,5 +1,6 @@
 package com.lixo.pos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,12 +18,13 @@ public class MenuItemCombo {
     private String name;
     
     private BigDecimal price;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "combo_id")
     private Combo combo;
     
     // ... other properties
-    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
     private MenuItem menuItem;

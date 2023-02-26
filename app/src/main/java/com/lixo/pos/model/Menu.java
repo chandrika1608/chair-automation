@@ -20,15 +20,15 @@ public class Menu {
     
     // ... other properties
     
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "menu")
-    private Set<MenuItem> menuItems;
+    private Set<MenuItem> items;
 
     @OneToMany(mappedBy = "menu")
-    private Set<Combo> comboOptions;
+    private Set<Combo> combos;
     
     // ... getters and setters
 }

@@ -7,3 +7,7 @@ eureka:
     enabled: false
 springdoc:
   packages-to-scan: com.lixo.pos.controller
+logging:
+  level:
+    root: info
+    org.springdoc: debug

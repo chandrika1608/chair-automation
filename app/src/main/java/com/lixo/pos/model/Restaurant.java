@@ -27,8 +27,8 @@ public class Restaurant {
     
     // ... other properties
     
-    @OneToMany(mappedBy = "restaurant")
-    private Set<Menu> menus;
+    @OneToOne(mappedBy = "restaurant")
+    private Menu menu;
 
     public Restaurant(Long id) {
         this.id=id;

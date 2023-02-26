@@ -55,7 +55,7 @@ public class RestaurantMenuService {
         existingCombo.setName(combo.getName());
         existingCombo.setDescription(combo.getDescription());
         existingCombo.setPrice(combo.getPrice());
-        existingCombo.setMenuItemCombos(combo.getMenuItemCombos());
+        existingCombo.setMenuItems(combo.getMenuItems());
         return restaurantComboRepository.save(existingCombo);
     }
 

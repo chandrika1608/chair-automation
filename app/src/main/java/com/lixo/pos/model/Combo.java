@@ -1,5 +1,6 @@
 package com.lixo.pos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,17 +23,17 @@ public class Combo {
 
     
     // ... other properties
-    
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "menu_id")
     private Menu menu;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @OneToMany(mappedBy = "combo")
-    private Set<MenuItemCombo> menuItemCombos;
+    private Set<MenuItemCombo> menuItems;
     
     // ... getters and setters
 }
