@@ -6,13 +6,12 @@
 *.iml
 *.ipr
 *.iws
-
+/target/
 # Maven-specific
 log/
-
+target/
 !.mvn/wrapper/maven-wrapper.jar
 # IDE-specific
-
-*.idea
 # Other
 *.DS_Store
+.idea/
