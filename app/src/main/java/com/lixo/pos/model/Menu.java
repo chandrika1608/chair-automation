@@ -28,7 +28,7 @@ public class Menu {
     private Set<MenuItem> menuItems;
 
     @OneToMany(mappedBy = "menu")
-    private Set<ComboOption> comboOptions;
+    private Set<Combo> comboOptions;
     
     // ... getters and setters
 }

@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-public class MenuItem {
+public class MenuItem implements Item{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,9 +26,11 @@ public class MenuItem {
     @ManyToOne
     @JoinColumn(name = "menu_id")
     private Menu menu;
-    
+    @ManyToOne
+    @JoinColumn(name = "restaurants_id")
+    private Restaurant restaurant;
     @OneToMany(mappedBy = "menuItem")
-    private Set<MenuItemOption> options;
+    private Set<MenuItemCombo> options;
     
     // ... getters and setters
 }

@@ -5,12 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Entity
 @Setter
 @Getter
-public class ComboOption {
+public class MenuItemCombo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,15 +17,15 @@ public class ComboOption {
     private String name;
     
     private BigDecimal price;
+    @ManyToOne
+    @JoinColumn(name = "combo_id")
+    private Combo combo;
     
     // ... other properties
     
     @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
-    
-    @OneToMany(mappedBy = "comboOption")
-    private Set<MenuItemOption> options;
+    @JoinColumn(name = "menu_item_id")
+    private MenuItem menuItem;
     
     // ... getters and setters
 }
