@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-
+@NoArgsConstructor
 public class Restaurant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

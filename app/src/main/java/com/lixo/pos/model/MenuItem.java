@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-public class MenuItem implements Item{
+public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

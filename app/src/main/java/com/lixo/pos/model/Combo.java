@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-public class Combo implements Item{
+public class Combo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -4,17 +4,20 @@ import com.lixo.pos.exception.ResourceNotFoundException;
 import com.lixo.pos.model.Combo;
 import com.lixo.pos.model.MenuItem;
 import com.lixo.pos.model.Restaurant;
+import com.lixo.pos.repository.RestaurantComboRepository;
 import com.lixo.pos.repository.RestaurantMenuRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class RestaurantMenuService {
-    @Autowired
-    private RestaurantMenuRepository restaurantMenuRepository;
+    private final RestaurantMenuRepository restaurantMenuRepository;
 
+    private final RestaurantComboRepository restaurantComboRepository;
     public List<MenuItem> getAllMenuItems(Long restaurantId) {
         return restaurantMenuRepository.findAllByRestaurantId(restaurantId);
     }
@@ -44,7 +47,7 @@ public class RestaurantMenuService {
 
     public Combo addCombo(Long restaurantId, Combo combo) {
         combo.setRestaurant(new Restaurant(restaurantId));
-        return restaurantMenuRepository.save(combo);
+        return restaurantComboRepository.save(combo);
     }
 
     public Combo updateCombo(Long restaurantId, Long comboId, Combo combo) {
@@ -53,16 +56,16 @@ public class RestaurantMenuService {
         existingCombo.setDescription(combo.getDescription());
         existingCombo.setPrice(combo.getPrice());
         existingCombo.setMenuItemCombos(combo.getMenuItemCombos());
-        return restaurantMenuRepository.save(existingCombo);
+        return restaurantComboRepository.save(existingCombo);
     }
 
     public void deleteCombo(Long restaurantId, Long comboId) {
         Combo existingCombo = getComboById(restaurantId, comboId);
-        restaurantMenuRepository.delete(existingCombo);
+        restaurantComboRepository.delete(existingCombo);
     }
 
     private Combo getComboById(Long restaurantId, Long comboId) {
-        return restaurantMenuRepository.findComboByRestaurantIdAndId(restaurantId, comboId)
+        return restaurantComboRepository.findComboByRestaurantIdAndId(restaurantId, comboId)
                 .orElseThrow(() -> new ResourceNotFoundException("Combo not found with id " + comboId));
     }
 }
