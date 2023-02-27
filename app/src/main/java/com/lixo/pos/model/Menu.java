@@ -1,5 +1,6 @@
 package com.lixo.pos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,8 @@ public class Menu {
     private String description;
     
     // ... other properties
-    
+
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
