@@ -1,13 +1,12 @@
 package com.lixo.pos.service;
 
-import com.lixo.pos.exception.ResourceNotFoundException;
+import com.lixo.pos.exception.RestaurantNotFoundException;
 import com.lixo.pos.model.Combo;
 import com.lixo.pos.model.MenuItem;
 import com.lixo.pos.model.Restaurant;
 import com.lixo.pos.repository.RestaurantComboRepository;
 import com.lixo.pos.repository.RestaurantMenuRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class RestaurantMenuService {
 
     public MenuItem getMenuItemById(Long restaurantId, Long itemId) {
         return restaurantMenuRepository.findByRestaurantIdAndId(restaurantId, itemId)
-                .orElseThrow(() -> new ResourceNotFoundException("MenuItem not found with id " + itemId));
+                .orElseThrow(() -> new RestaurantNotFoundException("MenuItem not found with id " + itemId));
     }
 
     public MenuItem addMenuItem(Long restaurantId, MenuItem menuItem) {
@@ -66,6 +65,6 @@ public class RestaurantMenuService {
 
     private Combo getComboById(Long restaurantId, Long comboId) {
         return restaurantComboRepository.findComboByRestaurantIdAndId(restaurantId, comboId)
-                .orElseThrow(() -> new ResourceNotFoundException("Combo not found with id " + comboId));
+                .orElseThrow(() -> new RestaurantNotFoundException("Combo not found with id " + comboId));
     }
 }

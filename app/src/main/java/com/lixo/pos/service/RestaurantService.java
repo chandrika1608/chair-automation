@@ -1,6 +1,6 @@
 package com.lixo.pos.service;
 
-import com.lixo.pos.exception.ResourceNotFoundException;
+import com.lixo.pos.exception.RestaurantNotFoundException;
 import com.lixo.pos.model.Restaurant;
 import com.lixo.pos.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class RestaurantService{
         if (restaurant.isPresent()) {
             return restaurant.get();
         } else {
-            throw new ResourceNotFoundException("Restaurant not found with id " + id);
+            throw new RestaurantNotFoundException("Restaurant not found with id " + id);
         }
     }
 
@@ -42,7 +42,7 @@ public class RestaurantService{
             updatedRestaurant.setPhone(restaurant.getPhone());
             return restaurantRepository.save(updatedRestaurant);
         } else {
-            throw new ResourceNotFoundException("Restaurant not found with id " + id);
+            throw new RestaurantNotFoundException("Restaurant not found with id " + id);
         }
     }
 
@@ -51,7 +51,7 @@ public class RestaurantService{
         if (restaurant.isPresent()) {
             restaurantRepository.delete(restaurant.get());
         } else {
-            throw new ResourceNotFoundException("Restaurant not found with id " + id);
+            throw new RestaurantNotFoundException("Restaurant not found with id " + id);
         }
     }
 }
