@@ -58,8 +58,6 @@ public class RestaurantController {
     public ResponseEntity<Restaurant> addRestaurant(@RequestBody @Valid Restaurant restaurant) throws RestaurantNotFoundException
     {
         try {
-            //return new ResponseEntity<>(createdRestaurant, HttpStatus.CREATED);
-
             Restaurant newRestaurant = restaurantService.createRestaurant(restaurant);
             return ResponseEntity.created(URI.create("/api/restaurants/" + newRestaurant.getId()))
                     .body(newRestaurant);

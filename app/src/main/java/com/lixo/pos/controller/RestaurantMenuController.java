@@ -26,7 +26,7 @@ public class RestaurantMenuController {
         return restaurantMenuService.getMenuItemById(restaurantId, itemId);
     }
 
-    @PostMapping
+    @PostMapping("/menu/menuItems")
     public ResponseEntity<MenuItem> addMenuItem(@PathVariable String restaurantId, @RequestBody MenuItem menuItem) {
         MenuItem newMenuItem = restaurantMenuService.addMenuItem(restaurantId, menuItem);
         return ResponseEntity.created(URI.create("/api/restaurants/" + restaurantId + "/menu/" + newMenuItem.getId()))
