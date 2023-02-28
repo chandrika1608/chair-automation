@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RestaurantMenuRepository extends JpaRepository<MenuItem, Long> {
+public interface RestaurantMenuRepository extends JpaRepository<MenuItem, String> {
 
-    List<MenuItem> findAllByRestaurantId(Long restaurantId);
+    List<MenuItem> findAllByRestaurantId(String restaurantId);
 
-    Optional<MenuItem> findByRestaurantIdAndId(Long restaurantId, Long id);
+    Optional<MenuItem> findByRestaurantIdAndId(String restaurantId, String id);
 
 
 }

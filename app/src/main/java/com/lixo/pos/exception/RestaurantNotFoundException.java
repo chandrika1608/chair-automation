@@ -1,5 +1,6 @@
 package com.lixo.pos.exception;
 
+import jakarta.persistence.PersistenceException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -18,8 +19,6 @@ public class RestaurantNotFoundException extends RuntimeException {
     public RestaurantNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
-
-
 
 
 }

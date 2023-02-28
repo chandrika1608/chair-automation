@@ -20,7 +20,7 @@ public class RestaurantService{
         return restaurantRepository.findAll();
     }
 
-    public Restaurant getRestaurantById(Long id) {
+    public Restaurant getRestaurantById(String id) {
         Optional<Restaurant> restaurant = restaurantRepository.findById(id);
         if (restaurant.isPresent()) {
             return restaurant.get();
@@ -33,7 +33,7 @@ public class RestaurantService{
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant updateRestaurant(Long id, Restaurant restaurant) {
+    public Restaurant updateRestaurant(String id, Restaurant restaurant) {
         Optional<Restaurant> existingRestaurant = restaurantRepository.findById(id);
         if (existingRestaurant.isPresent()) {
             Restaurant updatedRestaurant = existingRestaurant.get();
@@ -46,7 +46,7 @@ public class RestaurantService{
         }
     }
 
-    public void deleteRestaurant(Long id) {
+    public void deleteRestaurant(String id) {
         Optional<Restaurant> restaurant = restaurantRepository.findById(id);
         if (restaurant.isPresent()) {
             restaurantRepository.delete(restaurant.get());

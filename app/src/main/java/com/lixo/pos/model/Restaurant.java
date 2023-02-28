@@ -14,8 +14,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Restaurant {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     @NotEmpty(message = "Restaurant name is mandatory")
     private String name;
     @NotEmpty(message = "Restaurant address is mandatory")
@@ -32,7 +32,7 @@ public class Restaurant {
     @OneToOne(mappedBy = "restaurant")
     private Menu menu;
 
-    public Restaurant(Long id) {
+    public Restaurant(String id) {
         this.id=id;
     }
     // ... getters and setters

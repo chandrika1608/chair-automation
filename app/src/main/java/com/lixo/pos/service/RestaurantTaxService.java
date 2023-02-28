@@ -22,7 +22,7 @@ public class RestaurantTaxService {
     }
 
     @Transactional
-    public Tax getTaxById(Long id) {
+    public Tax getTaxById(String id) {
         return taxRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
     }
@@ -34,7 +34,7 @@ public class RestaurantTaxService {
     }
 
     @Transactional
-    public Tax updateTax(Long id, Tax updatedTax) {
+    public Tax updateTax(String id, Tax updatedTax) {
         Tax tax = taxRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
         tax.setName(updatedTax.getName());
@@ -43,7 +43,7 @@ public class RestaurantTaxService {
     }
 
     @Transactional
-    public static void deleteTax(Long id) {
+    public static void deleteTax(String id) {
         taxRepository.deleteById(id);
     }
 }

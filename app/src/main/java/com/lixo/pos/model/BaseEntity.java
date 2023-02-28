@@ -6,13 +6,14 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
 @Data
 @MappedSuperclass
 public class BaseEntity {
     @JsonInclude(JsonInclude.Include.ALWAYS)
     @Column(name = "created_date")
-    private Timestamp createdDate = Timestamp.valueOf(LocalDateTime.now());
+    private Instant createdDate;
 
     @JsonInclude(JsonInclude.Include.ALWAYS)
     @Column(name = "created_user")
@@ -20,7 +21,7 @@ public class BaseEntity {
 
     @JsonInclude(JsonInclude.Include.ALWAYS)
     @Column(name = "updated_date")
-    private Timestamp updatedDate = Timestamp.valueOf(LocalDateTime.now());
+    private Instant updatedDate;
 
     @JsonInclude(JsonInclude.Include.ALWAYS)
     @Column(name = "updated_user")

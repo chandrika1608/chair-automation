@@ -13,8 +13,8 @@ import java.util.Set;
 @Getter
 public class MenuItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     
     private String name;
     
@@ -36,6 +36,11 @@ public class MenuItem {
     @JsonIgnore
     @OneToMany(mappedBy = "menuItem")
     private Set<MenuItemCombo> menuItemCombo;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "offer_id")
+    private Offer offer;
 
     // ... getters and setters
 }

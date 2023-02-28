@@ -8,9 +8,9 @@ import lombok.Data;
 @Table(name = "tax")
 public class Tax extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "tax_id")
-    private Long id;
+    private String id;
     @Column(name = "tax_name")
     private String name;
     @Column(name = "tax_percentage")

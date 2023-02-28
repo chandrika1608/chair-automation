@@ -3,6 +3,9 @@ package com.lixo.pos.controller;
 import com.lixo.pos.exception.RestaurantNotFoundException;
 import com.lixo.pos.model.Restaurant;
 import com.lixo.pos.service.RestaurantService;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.OptimisticLockException;
+import jakarta.persistence.PersistenceException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,13 +24,34 @@ public class RestaurantController {
     private RestaurantService restaurantService;
 
     @GetMapping
-    public List<Restaurant> getAllRestaurants() {
-        return restaurantService.getAllRestaurants();
+    public List<Restaurant> getAllRestaurants() throws RestaurantNotFoundException {
+
+        try {
+            return restaurantService.getAllRestaurants();
+
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            throw new RestaurantNotFoundException("Error retrieving restaurants", e);
+
+        }
     }
 
     @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable Long id) {
-        return restaurantService.getRestaurantById(id);
+    public Restaurant getRestaurantById(@PathVariable String id) throws RestaurantNotFoundException {
+
+        try {
+            Restaurant restaurant = restaurantService.getRestaurantById(id);
+
+            if (restaurant == null) {
+                throw new RestaurantNotFoundException("Restaurant with ID " + id + " not found");
+            }
+
+            return restaurant;
+
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            throw new RestaurantNotFoundException("Error retrieving restaurant with ID " + id, e);
+
+        }
+
     }
 
     @PostMapping
@@ -46,7 +70,7 @@ public class RestaurantController {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<String> handleValidationExceptions(MethodArgumentNotValidException ex){
         List<String> errorMessages = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -56,14 +80,45 @@ public class RestaurantController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long id,@Valid @RequestBody Restaurant restaurant) {
-        Restaurant updatedRestaurant = restaurantService.updateRestaurant(id, restaurant);
-        return ResponseEntity.ok(updatedRestaurant);
+    public ResponseEntity<Restaurant> updateRestaurant(@PathVariable String id,@Valid @RequestBody Restaurant restaurant) throws RestaurantNotFoundException, OptimisticLockException {
+
+        try {
+
+            Restaurant updatedRestaurant = restaurantService.updateRestaurant(id, restaurant);
+
+            if (restaurant == null) {
+                throw new EntityNotFoundException("Restaurant with ID " + updatedRestaurant.getId() + " not found");
+            }
+            return ResponseEntity.ok(updatedRestaurant);
+
+        } catch (IllegalStateException | IllegalArgumentException  e) {
+            throw new RestaurantNotFoundException("Error updating restaurant with ID " + id, e);
+
+        } catch (OptimisticLockException e) {
+            throw new RestaurantNotFoundException("Concurrent update detected on restaurant with ID " + id, e);
+
+        }
+
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRestaurant(@PathVariable Long id) throws Exception {
-        restaurantService.deleteRestaurant(id);
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable String id) throws RestaurantNotFoundException {
+
+        try {
+
+            Restaurant restaurant =restaurantService.getRestaurantById(id);
+
+            if (restaurant == null) {
+                throw new RestaurantNotFoundException("Restaurant with ID " + id + " not found");
+            }
+            restaurantService.deleteRestaurant(id);
+        }
+        catch (IllegalStateException | IllegalArgumentException e) {
+
+            throw new RestaurantNotFoundException("Error deleting restaurant with ID " + id, e);
+
+        }
         return ResponseEntity.noContent().build();
     }
+
 }

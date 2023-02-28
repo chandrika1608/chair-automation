@@ -19,7 +19,7 @@ public class RestaurantOfferController {
     }
 
     @GetMapping("tax/{id}")
-    public Tax getTax(@PathVariable Long id) {
+    public Tax getTax(@PathVariable String id) {
         return offerService.getTaxById(id);
     }
 
@@ -28,11 +28,11 @@ public class RestaurantOfferController {
         return offerService.createTax(newTax);
     }
     @DeleteMapping("delete/{id}")
-    public void deleteTax(@PathVariable Long id){
+    public void deleteTax(@PathVariable String id){
         offerService.deleteTax(id);
     }
     @PutMapping("update/{id}")
-    public Tax updateTax(@RequestBody Tax tax,@PathVariable Long id){
+    public Tax updateTax(@RequestBody Tax tax,@PathVariable String id){
         return offerService.updateTax(id,tax);
     }
 }

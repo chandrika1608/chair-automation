@@ -5,15 +5,18 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name = "offer")
 public class Offer {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "offer_id")
-    private Long id;
+    private String id;
     @Column(name = "name")
     private String name;
 
@@ -22,9 +25,14 @@ public class Offer {
 
     @JsonInclude(JsonInclude.Include.ALWAYS)
     @Column(name = "from_date")
-    private Timestamp fromDate = Timestamp.valueOf(LocalDateTime.now());
+    private Instant fromDate;
 
     @JsonInclude(JsonInclude.Include.ALWAYS)
     @Column(name = "to_date")
-    private Timestamp toDate = Timestamp.valueOf(LocalDateTime.now());
+    private Instant toDate;
+
+    @OneToMany(mappedBy = "offer")
+    private Set <MenuItem> menuItem;
+
+
 }

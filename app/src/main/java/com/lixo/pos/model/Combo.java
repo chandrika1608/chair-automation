@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.print.DocFlavor;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -13,8 +14,8 @@ import java.util.Set;
 @Getter
 public class Combo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     
     private String name;
     private String description;

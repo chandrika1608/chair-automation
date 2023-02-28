@@ -20,7 +20,7 @@ public class RestaurantKitchenService  {
     }
 
     @Transactional
-    public Kitchen getKitchenById(Long id) {
+    public Kitchen getKitchenById(String id) {
         return kitchenRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
     }
@@ -31,16 +31,16 @@ public class RestaurantKitchenService  {
     }
 
     @Transactional
-    public Kitchen updateKitchen(Long id, Kitchen updatedKitchen) {
+    public Kitchen updateKitchen(String id, Kitchen updatedKitchen) {
         Kitchen kitchen = kitchenRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
         kitchen.setName(updatedKitchen.getName());
-        kitchen.setRestaurant(updatedKitchen.getRestaurant());
+        kitchen.setRestaurantId(updatedKitchen.getRestaurantId());
         return kitchenRepository.save(kitchen);
     }
 
     @Transactional
-    public void deleteKitchen(Long id) {
+    public void deleteKitchen(String id) {
         kitchenRepository.deleteById(id);
     }
 
