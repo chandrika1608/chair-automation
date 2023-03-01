@@ -1,8 +1,7 @@
 package com.lixo.pos.service;
 
-import com.lixo.pos.model.BaseEntity;
 import com.lixo.pos.model.Kitchen;
-import com.lixo.pos.repository.RestaurantKitchenRepository;
+import com.lixo.pos.repository.KitchenRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-public class RestaurantKitchenService  {
+public class KitchenService {
     @Autowired
-    private RestaurantKitchenRepository kitchenRepository;
+    private KitchenRepository kitchenRepository;
 
     @Transactional
     public List<Kitchen> getAllKitchen() {

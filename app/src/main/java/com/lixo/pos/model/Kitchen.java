@@ -10,7 +10,7 @@ import lombok.Data;
 public class Kitchen extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "kitchen_id")
+
     private String id;
     @Column(name = "kitchen_name")
     @NotEmpty(message = "Kitchen name is mandatory")

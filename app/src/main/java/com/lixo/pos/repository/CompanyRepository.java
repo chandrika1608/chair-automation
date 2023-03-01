@@ -1,10 +1,9 @@
 package com.lixo.pos.repository;
 
-import com.lixo.pos.model.Kitchen;
+import com.lixo.pos.model.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RestaurantKitchenRepository extends JpaRepository<Kitchen, String>
-{
+public interface CompanyRepository extends JpaRepository<Company,String> {
 }

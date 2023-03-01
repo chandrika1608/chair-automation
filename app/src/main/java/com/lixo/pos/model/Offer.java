@@ -15,7 +15,7 @@ import java.util.Set;
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "offer_id")
+
     private String id;
     @Column(name = "name")
     private String name;
@@ -23,6 +23,8 @@ public class Offer {
     @Column(name = "percentage")
     private float percentage;
 
+    @Column(name = "restaurant_id")
+    private Long restaurantId;
     @JsonInclude(JsonInclude.Include.ALWAYS)
     @Column(name = "from_date")
     private Instant fromDate;
