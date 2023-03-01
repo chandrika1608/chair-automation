@@ -63,8 +63,10 @@ public class RestaurantMenuService {
         restaurantComboRepository.delete(existingCombo);
     }
 
-    private Combo getComboById(String restaurantId, String comboId) {
+    public Combo getComboById(String restaurantId, String comboId) {
         return restaurantComboRepository.findComboByRestaurantIdAndId(restaurantId, comboId)
                 .orElseThrow(() -> new RestaurantNotFoundException("Combo not found with id " + comboId));
     }
+
+
 }

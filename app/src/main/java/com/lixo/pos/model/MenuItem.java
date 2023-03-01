@@ -21,6 +21,8 @@ public class MenuItem {
     private String description;
     
     private BigDecimal price;
+    @Column(name = "image_url")
+    private String imageURL;
     
     // ... other properties
 

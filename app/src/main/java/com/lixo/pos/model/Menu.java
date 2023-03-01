@@ -2,6 +2,7 @@ package com.lixo.pos.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,9 +15,9 @@ public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    
+    @NotEmpty(message = "Menu name is mandatory")
     private String name;
-    
+    @NotEmpty(message = "description is mandatory")
     private String description;
     
     // ... other properties

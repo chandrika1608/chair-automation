@@ -1,6 +1,7 @@
 package com.lixo.pos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    @Column(name = "company_name")
+    @NotEmpty(message = "company name is mandatory")
     private String name;
 
     @Column(name = "company_address")

@@ -1,6 +1,7 @@
 package com.lixo.pos.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
@@ -11,9 +12,11 @@ public class Tax extends BaseEntity{
     @GeneratedValue(strategy = GenerationType.UUID)
 
     private String id;
-    @Column(name = "tax_name")
+
+    @NotEmpty(message = "Tax name is mandatory")
     private String name;
     @Column(name = "tax_percentage")
+    @NotEmpty(message = "Tax percentage name is mandatory")
     private float taxPercentage;
     @Column(name = "status")
     private String status;
