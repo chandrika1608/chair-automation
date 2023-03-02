@@ -29,12 +29,5 @@ public class Offer {
     @JsonInclude(JsonInclude.Include.ALWAYS)
     private Instant toDate;
 
-    @OneToOne
-    @JoinColumn(name = "menu_item_id")
-    private MenuItem menuItem;
-
-    @OneToOne
-    @JoinColumn(name = "menu_item_combo_id")
-    private MenuItemCombo menuItemCombo;
 
 }

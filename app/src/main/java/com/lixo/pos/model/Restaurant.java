@@ -30,6 +30,7 @@ public class Restaurant {
     @OneToMany(mappedBy = "restaurant")
     private Set<MenuItem> menuItem;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;

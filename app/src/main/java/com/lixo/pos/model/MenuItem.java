@@ -39,9 +39,6 @@ public class MenuItem {
     @OneToOne(mappedBy = "menuItem")
     private Kitchen kitchen;
 
-    @OneToOne(mappedBy = "menuItem")
-    private Offer offer;
-
     @OneToMany(mappedBy = "menuItem")
     private Set<Tax> taxes;
 

@@ -29,7 +29,5 @@ public class MenuItemCombo {
     @JoinColumn(name = "menu_item_id")
     private MenuItem menuItem;
 
-    @OneToOne(mappedBy = "menuItemCombo")
-    private Offer offer;
     // ... getters and setters
 }
