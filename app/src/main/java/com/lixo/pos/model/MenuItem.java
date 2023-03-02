@@ -36,7 +36,8 @@ public class MenuItem {
     @OneToMany(mappedBy = "menuItem")
     private Set<MenuItemCombo> menuItemCombo;
 
-    @OneToOne(mappedBy = "menuItem")
+    @OneToOne
+    @JoinColumn(name="kitchen_id")
     private Kitchen kitchen;
 
     @OneToMany(mappedBy = "menuItem")
