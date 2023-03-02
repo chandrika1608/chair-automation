@@ -13,36 +13,39 @@ import java.util.Set;
 @Getter
 public class MenuItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     private String name;
     
     private String description;
     
     private BigDecimal price;
-    @Column(name = "image_url")
     private String imageURL;
+    private MenuType menuType;
+    private MealType mealType;
     
     // ... other properties
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "restaurants_id")
+    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @JsonIgnore
     @OneToMany(mappedBy = "menuItem")
     private Set<MenuItemCombo> menuItemCombo;
 
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "offer_id")
+    @OneToOne(mappedBy = "menuItem")
+    private Kitchen kitchen;
+
+    @OneToOne(mappedBy = "menuItem")
     private Offer offer;
 
-    // ... getters and setters
+    @OneToMany(mappedBy = "menuItem")
+    private Set<Tax> taxes;
+
+    @OneToOne
+    @JoinColumn(name="food_category_id")
+    private FoodCategory foodCategory;
 }

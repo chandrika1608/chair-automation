@@ -12,8 +12,8 @@ import java.math.BigDecimal;
 @Getter
 public class MenuItemCombo {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     private String name;
     
@@ -28,6 +28,8 @@ public class MenuItemCombo {
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
     private MenuItem menuItem;
-    
+
+    @OneToOne(mappedBy = "menuItemCombo")
+    private Offer offer;
     // ... getters and setters
 }

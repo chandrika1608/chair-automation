@@ -2,7 +2,6 @@ package com.lixo.pos.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,17 +10,12 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-public class Tax extends BaseEntity{
+public class FoodCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Tax name is mandatory")
+    @NotEmpty(message = "Kitchen name is mandatory")
     private String name;
-    @NotEmpty(message = "Tax percentage name is mandatory")
-    private float taxPercentage;
-    private String status;
-
-    @ManyToOne
-    @JoinColumn(name = "menu_item_id")
+    @OneToOne(mappedBy = "foodCategory")
     private MenuItem menuItem;
 }

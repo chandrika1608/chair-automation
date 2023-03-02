@@ -14,8 +14,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class Restaurant {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotEmpty(message = "Restaurant name is mandatory")
     private String name;
     @NotEmpty(message = "Restaurant address is mandatory")
@@ -24,15 +24,17 @@ public class Restaurant {
     private String phoneNumber;
     @NotEmpty(message = "Restaurant site name is mandatory")
     private String website;
-    @NotEmpty
-    private String phone;
     
     // ... other properties
     
-    @OneToOne(mappedBy = "restaurant")
-    private Menu menu;
+    @OneToMany(mappedBy = "restaurant")
+    private Set<MenuItem> menuItem;
 
-    public Restaurant(String id) {
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    public Restaurant(Long id) {
         this.id=id;
     }
     // ... getters and setters

@@ -2,30 +2,33 @@ package com.lixo.pos.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
-@Data
+import java.util.Set;
+
+@Getter
+@Setter
 @Entity
-@Table(name ="company")
+@NoArgsConstructor
 public class Company {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotEmpty(message = "company name is mandatory")
     private String name;
 
-    @Column(name = "company_address")
     private String companyAddress;
 
-    @Column(name = "city")
     private String city;
-    @Column(name = "state")
     private String state;
-    @Column(name = "country")
     private String country;
-    @Column(name = "latitude")
     private BigDecimal latitude;
-    @Column(name = "longitude")
     private BigDecimal longitude;
+    @OneToMany(mappedBy = "company")
+    private Set<Restaurant> restaurants;
+
+    public Company(Long id) {
+        this.id = id;
+    }
 }

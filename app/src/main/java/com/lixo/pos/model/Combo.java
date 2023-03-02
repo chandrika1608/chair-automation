@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.print.DocFlavor;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -14,20 +13,14 @@ import java.util.Set;
 @Getter
 public class Combo {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     
     private String name;
     private String description;
     
     private BigDecimal price;
 
-    
-    // ... other properties
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "menu_id")
-    private Menu menu;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

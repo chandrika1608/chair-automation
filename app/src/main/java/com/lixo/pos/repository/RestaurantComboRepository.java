@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RestaurantComboRepository extends JpaRepository<Combo, String> {
-    Optional<Combo> findComboByRestaurantIdAndId(String restaurantId, String id);
+public interface RestaurantComboRepository extends JpaRepository<Combo, Long> {
+    Optional<Combo> findComboByRestaurantIdAndId(Long restaurantId, Long id);
 
 }

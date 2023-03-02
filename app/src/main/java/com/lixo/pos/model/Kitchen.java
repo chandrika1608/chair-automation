@@ -9,21 +9,21 @@ import lombok.Data;
 @Table(name = "kitchen")
 public class Kitchen extends BaseEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-
-    private String id;
-    @Column(name = "kitchen_name")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotEmpty(message = "Kitchen name is mandatory")
     private String name;
 
-    @Column(name = "restaurant_id")
     @NotEmpty(message = "Kitchen name is mandatory")
     private String restaurantId;
 
-    @Column(name = "status")
     @NotEmpty(message = "Status is mandatory")
     private String status;
-    @Column(name = "location")
     @NotEmpty(message = "Location is mandatory")
     private String location;
+
+    @OneToOne
+    @JoinColumn(name = "menu_item_id")
+    private MenuItem menuItem;
+
 }
