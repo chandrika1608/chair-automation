@@ -1,5 +1,9 @@
 package com.lixo.pos.service;
 
+import com.lixo.pos.exception.ResourceNotFoundException;
+import com.lixo.pos.model.Company;
+import com.lixo.pos.model.Kitchen;
+import com.lixo.pos.model.MenuItem;
 import com.lixo.pos.model.Tax;
 import com.lixo.pos.repository.TaxRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -8,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TaxService {
@@ -15,35 +20,44 @@ public class TaxService {
     @Autowired
     private static TaxRepository taxRepository;
 
-    @Transactional
-    public List<Tax> getAllTax() {
+    public List<Tax> getAllTax(Long menuItemId) {
 
-        return taxRepository.findAll();
+        return taxRepository.findAllByMenuItemId(menuItemId);
     }
 
-    @Transactional
-    public Tax getTaxById(String id) {
-        return taxRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
+    public Tax getTaxById(Long menuItemId,Long id) {
+        Optional<Tax> tax = taxRepository.findByMenuItemIdAndId(menuItemId,id);
+        if (tax.isPresent()) {
+            return tax.get();
+        } else {
+            throw new ResourceNotFoundException("tax not found with id " + id);
+        }
     }
 
-    @Transactional
-    public Tax createTax(Tax newTax) {
-
-        return taxRepository.save(newTax);
-    }
-
-    @Transactional
-    public Tax updateTax(String id, Tax updatedTax) {
-        Tax tax = taxRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
-        tax.setName(updatedTax.getName());
-        tax.setTaxPercentage(updatedTax.getTaxPercentage());
+    public Tax createTax(Long menuItemId,Tax tax) {
+        tax.setMenuItem(new MenuItem(menuItemId));
         return taxRepository.save(tax);
     }
 
-    @Transactional
-    public static void deleteTax(String id) {
-        taxRepository.deleteById(id);
+    public Tax  updateTax(Long menuItemId,Long id, Tax tax) {
+        Optional<Tax> existingTax = taxRepository.findByMenuItemIdAndId(menuItemId,id);
+        if (existingTax.isPresent()) {
+            Tax updatedTax = existingTax.get();
+            updatedTax.setName(tax.getName());
+            updatedTax.setStatus(tax.getStatus());
+            updatedTax.setTaxPercentage(tax.getTaxPercentage());
+            return taxRepository.save(updatedTax);
+        } else {
+            throw new ResourceNotFoundException("Tax not found with id " + id);
+        }
+    }
+
+    public void deleteTax(Long menuItemId,Long id) {
+        Optional<Tax> tax = taxRepository.findByMenuItemIdAndId(menuItemId,id);
+        if (tax.isPresent()) {
+            taxRepository.delete(tax.get());
+        } else {
+            throw new ResourceNotFoundException("tax not found with id " + id);
+        }
     }
 }

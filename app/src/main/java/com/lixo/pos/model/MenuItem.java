@@ -3,6 +3,7 @@ package com.lixo.pos.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class MenuItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,4 +48,8 @@ public class MenuItem {
     @OneToOne
     @JoinColumn(name="food_category_id")
     private FoodCategory foodCategory;
+
+    public MenuItem(Long id) {
+        this.id=id;
+    }
 }

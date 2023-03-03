@@ -1,9 +1,11 @@
 package com.lixo.pos.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
@@ -11,6 +13,7 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class Tax extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,7 @@ public class Tax extends BaseEntity{
     private String status;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "menu_item_id")
-    private MenuItem menuItem;
+    private  MenuItem menuItem;
 }
