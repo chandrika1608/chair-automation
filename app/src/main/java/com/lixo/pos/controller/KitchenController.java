@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/kitchen")
+@RequestMapping("/api/restaurants/{restaurantId}/kitchens/")
 public class KitchenController {
     @Autowired
     private KitchenService kitchenService;
@@ -24,7 +24,7 @@ public class KitchenController {
     public Kitchen getKitchen(@PathVariable Long restaurantId,@PathVariable Long id) {
         return kitchenService.getKitchenById(restaurantId,id);
     }
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity<Kitchen> addKitchen(@PathVariable Long restaurantId,@RequestBody Kitchen kitchen)
     {
         Kitchen newKitchen = kitchenService.createKitchen(restaurantId,kitchen);

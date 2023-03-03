@@ -11,7 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/menuitems/{menuItemId}/taxes")
 public class TaxController {
     @Autowired
     private TaxService taxService;
