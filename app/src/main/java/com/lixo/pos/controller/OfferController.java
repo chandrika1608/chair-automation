@@ -1,16 +1,16 @@
 package com.lixo.pos.controller;
 
 import com.lixo.pos.model.Offer;
-import com.lixo.pos.model.Tax;
+import com.lixo.pos.model.Offer;
 import com.lixo.pos.service.OfferService;
-import com.lixo.pos.service.TaxService;
+import com.lixo.pos.service.OfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/tax")
+@RequestMapping("/offer")
 public class OfferController {
     @Autowired
     private OfferService offerService;

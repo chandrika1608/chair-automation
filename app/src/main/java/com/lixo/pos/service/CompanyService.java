@@ -16,12 +16,12 @@ public class CompanyService {
     private CompanyRepository companyRepository;
 
     @Transactional
-    public List<Company> getAllCompany() {
+    public List<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
 
     @Transactional
-    public Company getCompanyById(String id) {
+    public Company getCompanyById(Long id) {
         return companyRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
     }
@@ -32,7 +32,7 @@ public class CompanyService {
     }
 
     @Transactional
-    public Company updateCompany(String id, Company updatedCompany) {
+    public Company updateCompany(Long id, Company updatedCompany) {
         Company company = companyRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
         company.setName(updatedCompany.getName());
@@ -44,7 +44,7 @@ public class CompanyService {
     }
 
     @Transactional
-    public void deleteCompany(String id) {
+    public void deleteCompany(Long id) {
         companyRepository.deleteById(id);
     }
 
