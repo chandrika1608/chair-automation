@@ -25,9 +25,9 @@ public class Restaurant {
     private String phoneNumber;
     @NotEmpty(message = "Restaurant site name is mandatory")
     private String website;
-    
+
     // ... other properties
-    
+
     @OneToMany(mappedBy = "restaurant")
     private Set<MenuItem> menuItem;
 
@@ -38,7 +38,7 @@ public class Restaurant {
 
 
     public Restaurant(Long id) {
-        this.id=id;
+        this.id = id;
     }
 
     // ... getters and setters

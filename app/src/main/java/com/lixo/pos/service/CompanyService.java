@@ -1,51 +1,58 @@
 package com.lixo.pos.service;
 
+import com.lixo.pos.exception.ResourceNotFoundException;
 import com.lixo.pos.model.Company;
 import com.lixo.pos.repository.CompanyRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CompanyService {
 
-    @Autowired
-    private CompanyRepository companyRepository;
 
-    @Transactional
+    private final CompanyRepository companyRepository;
+
+
     public List<Company> getAllCompanies() {
         return companyRepository.findAll();
     }
 
-    @Transactional
     public Company getCompanyById(Long id) {
         return companyRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
+                .orElseThrow(() -> new ResourceNotFoundException("Item not found with id: " + id));
     }
 
-    @Transactional
     public Company createCompany(Company newCompany) {
         return companyRepository.save(newCompany);
     }
 
-    @Transactional
-    public Company updateCompany(Long id, Company updatedCompany) {
-        Company company = companyRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
-        company.setName(updatedCompany.getName());
-        company.setCountry(updatedCompany.getCountry());
-        company.setState(updatedCompany.getState());
-        company.setCity(updatedCompany.getCity());
-        company.setCompanyAddress(updatedCompany.getCompanyAddress());
-        return companyRepository.save(company);
+
+    public Company updateCompany(Long id, Company company) {
+        Optional<Company> existingCompany = companyRepository.findById(id);
+        if (existingCompany.isPresent()) {
+            Company updatedCompany = existingCompany.get();
+            updatedCompany.setName(company.getName());
+            updatedCompany.setCountry(company.getCountry());
+            updatedCompany.setState(company.getState());
+            updatedCompany.setCity(company.getCity());
+            updatedCompany.setCompanyAddress(company.getCompanyAddress());
+            return companyRepository.save(updatedCompany);
+        } else {
+            throw new ResourceNotFoundException("Company not found with id " + id);
+        }
     }
 
-    @Transactional
     public void deleteCompany(Long id) {
-        companyRepository.deleteById(id);
+        Optional<Company> company = companyRepository.findById(id);
+        if (company.isPresent()) {
+            companyRepository.delete(company.get());
+        } else {
+            throw new ResourceNotFoundException("company not found with id " + id);
+        }
     }
 
 }

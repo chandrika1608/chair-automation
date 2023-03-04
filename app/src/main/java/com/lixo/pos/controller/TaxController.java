@@ -1,10 +1,8 @@
 package com.lixo.pos.controller;
 
-import com.lixo.pos.model.Kitchen;
 import com.lixo.pos.model.Tax;
 import com.lixo.pos.service.TaxService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,28 +22,28 @@ public class TaxController {
     }
 
     @GetMapping("/{id}")
-    public Tax getTaxById(@PathVariable Long menuItemId,@PathVariable Long id)
-    {
-        return taxService.getTaxById(menuItemId,id);
+    public Tax getTaxById(@PathVariable Long menuItemId, @PathVariable Long id) {
+        return taxService.getTaxById(menuItemId, id);
     }
 
     @PostMapping
-    public ResponseEntity<Tax> addTax(@PathVariable Long menuItemId,@RequestBody Tax tax) {
+    public ResponseEntity<Tax> addTax(@PathVariable Long menuItemId, @RequestBody Tax tax) {
 
-        Tax newTax = taxService.createTax(menuItemId,tax);
+        Tax newTax = taxService.createTax(menuItemId, tax);
         return ResponseEntity.created(URI.create("/api/tax/" + newTax.getId()))
                 .body(newTax);
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTax(@PathVariable Long menuItemId,@PathVariable Long id)
-    {
-        taxService.deleteTax(menuItemId,id);
+    public ResponseEntity<Void> deleteTax(@PathVariable Long menuItemId, @PathVariable Long id) {
+        taxService.deleteTax(menuItemId, id);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("/{id}")
-    public  ResponseEntity<Tax> updateTax(@PathVariable Long menuItemId,@PathVariable Long id,@RequestBody Tax tax){
 
-        Tax updatedTax= taxService.updateTax(menuItemId,id, tax);
+    @PutMapping("/{id}")
+    public ResponseEntity<Tax> updateTax(@PathVariable Long menuItemId, @PathVariable Long id, @RequestBody Tax tax) {
+
+        Tax updatedTax = taxService.updateTax(menuItemId, id, tax);
         return ResponseEntity.ok(updatedTax);
     }
 }

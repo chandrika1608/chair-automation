@@ -23,27 +23,27 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable Long companyId,@PathVariable Long id) {
+    public Restaurant getRestaurantById(@PathVariable Long companyId, @PathVariable Long id) {
 
-        return restaurantService.getRestaurantById(companyId,id);
+        return restaurantService.getRestaurantById(companyId, id);
     }
 
     @PostMapping
-    public ResponseEntity<Restaurant> addRestaurant(@PathVariable Long companyId,@RequestBody Restaurant restaurant) {
-        Restaurant newRestaurant = restaurantService.createRestaurant(companyId,restaurant);
+    public ResponseEntity<Restaurant> addRestaurant(@PathVariable Long companyId, @RequestBody Restaurant restaurant) {
+        Restaurant newRestaurant = restaurantService.createRestaurant(companyId, restaurant);
         return ResponseEntity.created(URI.create("/api/restaurants/" + newRestaurant.getId()))
                 .body(newRestaurant);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long companyId,@PathVariable Long id, @RequestBody Restaurant restaurant) {
-        Restaurant updatedRestaurant = restaurantService.updateRestaurant(companyId,id, restaurant);
+    public ResponseEntity<Restaurant> updateRestaurant(@PathVariable Long companyId, @PathVariable Long id, @RequestBody Restaurant restaurant) {
+        Restaurant updatedRestaurant = restaurantService.updateRestaurant(companyId, id, restaurant);
         return ResponseEntity.ok(updatedRestaurant);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRestaurant(@PathVariable Long companyId,@PathVariable Long id) {
-        restaurantService.deleteRestaurant(companyId,id);
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable Long companyId, @PathVariable Long id) {
+        restaurantService.deleteRestaurant(companyId, id);
         return ResponseEntity.noContent().build();
     }
 }

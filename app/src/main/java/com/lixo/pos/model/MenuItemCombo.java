@@ -14,15 +14,15 @@ public class MenuItemCombo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String name;
-    
+
     private BigDecimal price;
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "combo_id")
     private Combo combo;
-    
+
     // ... other properties
     @JsonIgnore
     @ManyToOne

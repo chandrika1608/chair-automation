@@ -1,13 +1,9 @@
 package com.lixo.pos.service;
 
 import com.lixo.pos.exception.ResourceNotFoundException;
-import com.lixo.pos.model.Company;
-import com.lixo.pos.model.Kitchen;
 import com.lixo.pos.model.MenuItem;
 import com.lixo.pos.model.Tax;
 import com.lixo.pos.repository.TaxRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +21,8 @@ public class TaxService {
         return taxRepository.findAllByMenuItemId(menuItemId);
     }
 
-    public Tax getTaxById(Long menuItemId,Long id) {
-        Optional<Tax> tax = taxRepository.findByMenuItemIdAndId(menuItemId,id);
+    public Tax getTaxById(Long menuItemId, Long id) {
+        Optional<Tax> tax = taxRepository.findByMenuItemIdAndId(menuItemId, id);
         if (tax.isPresent()) {
             return tax.get();
         } else {
@@ -34,13 +30,13 @@ public class TaxService {
         }
     }
 
-    public Tax createTax(Long menuItemId,Tax tax) {
+    public Tax createTax(Long menuItemId, Tax tax) {
         tax.setMenuItem(new MenuItem(menuItemId));
         return taxRepository.save(tax);
     }
 
-    public Tax  updateTax(Long menuItemId,Long id, Tax tax) {
-        Optional<Tax> existingTax = taxRepository.findByMenuItemIdAndId(menuItemId,id);
+    public Tax updateTax(Long menuItemId, Long id, Tax tax) {
+        Optional<Tax> existingTax = taxRepository.findByMenuItemIdAndId(menuItemId, id);
         if (existingTax.isPresent()) {
             Tax updatedTax = existingTax.get();
             updatedTax.setName(tax.getName());
@@ -52,8 +48,8 @@ public class TaxService {
         }
     }
 
-    public void deleteTax(Long menuItemId,Long id) {
-        Optional<Tax> tax = taxRepository.findByMenuItemIdAndId(menuItemId,id);
+    public void deleteTax(Long menuItemId, Long id) {
+        Optional<Tax> tax = taxRepository.findByMenuItemIdAndId(menuItemId, id);
         if (tax.isPresent()) {
             taxRepository.delete(tax.get());
         } else {

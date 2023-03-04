@@ -1,15 +1,9 @@
 package com.lixo.pos.service;
 
 import com.lixo.pos.exception.ResourceNotFoundException;
-import com.lixo.pos.model.Company;
 import com.lixo.pos.model.Kitchen;
-import com.lixo.pos.model.Restaurant;
 import com.lixo.pos.repository.KitchenRepository;
-import com.lixo.pos.repository.RestaurantRepository;
-import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,11 +1,8 @@
 package com.lixo.pos.controller;
 
 import com.lixo.pos.model.FoodCategory;
-import com.lixo.pos.model.FoodCategory;
-import com.lixo.pos.service.FoodCategoryService;
 import com.lixo.pos.service.FoodCategoryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,24 +20,28 @@ public class FoodCategoryController {
     public List<FoodCategory> getAllFoodCategories() {
         return foodCategoryService.getAllFoodCategories();
     }
+
     @GetMapping("/{id}")
     public FoodCategory getFoodCategory(@PathVariable Long id) {
         return foodCategoryService.getFoodCategoryById(id);
     }
+
     @PostMapping
-    public ResponseEntity<FoodCategory> addFoodCategory(@RequestBody FoodCategory newFoodCategory) {
-        FoodCategory foodCategory =  foodCategoryService.createFoodCategory(newFoodCategory);
+    public ResponseEntity<FoodCategory> addFoodCategory(@RequestBody FoodCategory foodCategory) {
+        FoodCategory newFoodCategory = foodCategoryService.createFoodCategory(foodCategory);
         return ResponseEntity.created(URI.create("/api/foodCategory/" + newFoodCategory.getId()))
                 .body(newFoodCategory);
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteFoodCategory(@PathVariable Long id) {
         foodCategoryService.deleteFoodCategory(id);
         return ResponseEntity.noContent().build();
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<FoodCategory> updateFoodCategory(@PathVariable Long id, @RequestBody FoodCategory foodCategory) {
-        FoodCategory updatedFoodCategory = foodCategoryService.updateFoodCategory(id,foodCategory);
+        FoodCategory updatedFoodCategory = foodCategoryService.updateFoodCategory(id, foodCategory);
         return ResponseEntity.ok(updatedFoodCategory);
     }
 }

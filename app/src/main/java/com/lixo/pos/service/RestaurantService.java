@@ -21,8 +21,8 @@ public class RestaurantService {
         return restaurantRepository.findAllByCompanyId(companyId);
     }
 
-    public Restaurant getRestaurantById(Long companyId,Long id) {
-        Optional<Restaurant> restaurant = restaurantRepository.findByCompanyIdAndId(companyId,id);
+    public Restaurant getRestaurantById(Long companyId, Long id) {
+        Optional<Restaurant> restaurant = restaurantRepository.findByCompanyIdAndId(companyId, id);
         if (restaurant.isPresent()) {
             return restaurant.get();
         } else {
@@ -30,13 +30,13 @@ public class RestaurantService {
         }
     }
 
-    public Restaurant createRestaurant(Long companyId,Restaurant restaurant) {
+    public Restaurant createRestaurant(Long companyId, Restaurant restaurant) {
         restaurant.setCompany(new Company(companyId));
         return restaurantRepository.save(restaurant);
     }
 
-    public Restaurant updateRestaurant(Long companyId,Long id, Restaurant restaurant) {
-        Optional<Restaurant> existingRestaurant = restaurantRepository.findByCompanyIdAndId(companyId,id);
+    public Restaurant updateRestaurant(Long companyId, Long id, Restaurant restaurant) {
+        Optional<Restaurant> existingRestaurant = restaurantRepository.findByCompanyIdAndId(companyId, id);
         if (existingRestaurant.isPresent()) {
             Restaurant updatedRestaurant = existingRestaurant.get();
             updatedRestaurant.setName(restaurant.getName());
@@ -47,8 +47,8 @@ public class RestaurantService {
         }
     }
 
-    public void deleteRestaurant(Long companyId,Long id) {
-        Optional<Restaurant> restaurant = restaurantRepository.findByCompanyIdAndId(companyId,id);
+    public void deleteRestaurant(Long companyId, Long id) {
+        Optional<Restaurant> restaurant = restaurantRepository.findByCompanyIdAndId(companyId, id);
         if (restaurant.isPresent()) {
             restaurantRepository.delete(restaurant.get());
         } else {

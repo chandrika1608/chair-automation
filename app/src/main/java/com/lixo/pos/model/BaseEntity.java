@@ -4,6 +4,7 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 
 import java.time.Instant;
+
 @Data
 @MappedSuperclass
 public class BaseEntity {

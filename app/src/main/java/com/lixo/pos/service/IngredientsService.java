@@ -1,50 +1,62 @@
 package com.lixo.pos.service;
 
+import com.lixo.pos.exception.ResourceNotFoundException;
 import com.lixo.pos.model.Ingredients;
-import com.lixo.pos.model.Ingredients;
-import com.lixo.pos.repository.IngredientsRepository;
 import com.lixo.pos.repository.IngredientsRepository;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class IngredientsService {
 
-    @Autowired
-    private IngredientsRepository ingredientsRepository;
 
-    @Transactional
+    private final IngredientsRepository ingredientsRepository;
+
+
     public List<Ingredients> getAllIngredients() {
         return ingredientsRepository.findAll();
     }
 
-    @Transactional
+
     public Ingredients getIngredientById(Long id) {
         return ingredientsRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
     }
 
-    @Transactional
+
     public Ingredients createIngredient(Ingredients newIngredient) {
         return ingredientsRepository.save(newIngredient);
     }
 
-    @Transactional
-    public Ingredients updateIngredients(Long id, Ingredients updatedIngredient) {
-        Ingredients ingredients = ingredientsRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
-        ingredients.setName(updatedIngredient.getName());
-        ingredients.setDescription(updatedIngredient.getDescription());
-        return ingredientsRepository.save(ingredients);
+
+    public Ingredients updateIngredients(Long id, Ingredients ingredient) {
+
+        Optional<Ingredients> existingIngredients = ingredientsRepository.findById(id);
+        if (existingIngredients.isPresent()) {
+            Ingredients updatedIngredients = existingIngredients.get();
+            updatedIngredients.setName(ingredient.getName());
+            updatedIngredients.setDescription(ingredient.getDescription());
+            return ingredientsRepository.save(updatedIngredients);
+        } else {
+            throw new ResourceNotFoundException("Ingredients not found with id " + id);
+        }
+
     }
 
-    @Transactional
     public void deleteIngredient(Long id) {
-        ingredientsRepository.deleteById(id);
+
+        Optional<Ingredients> ingredients = ingredientsRepository.findById(id);
+        if (ingredients.isPresent()) {
+            ingredientsRepository.delete(ingredients.get());
+        } else {
+            throw new ResourceNotFoundException("ingredients not found with id " + id);
+        }
+
     }
 
 }
