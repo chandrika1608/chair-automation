@@ -23,7 +23,7 @@ public class OfferService {
     }
 
     @Transactional
-    public Offer getOfferById(String id) {
+    public Offer getOfferById(Long id) {
         return offerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
     }
@@ -35,7 +35,7 @@ public class OfferService {
     }
 
     @Transactional
-    public Offer updateOffer(String id, Offer updatedOffer) {
+    public Offer updateOffer(Long id, Offer updatedOffer) {
         Offer offer = offerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with id: " + id));
         offer.setName(updatedOffer.getName());
@@ -44,7 +44,7 @@ public class OfferService {
     }
 
     @Transactional
-    public static void deleteOffer(String id) {
+    public static void deleteOffer(Long id) {
         offerRepository.deleteById(id);
     }
 }

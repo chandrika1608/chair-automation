@@ -23,7 +23,7 @@ public class OfferController {
     }
 
     @GetMapping("/{id}")
-    public Offer getOffer(@PathVariable String id) {
+    public Offer getOffer(@PathVariable Long id) {
         return offerService.getOfferById(id);
     }
 
@@ -32,11 +32,11 @@ public class OfferController {
         return offerService.createOffer(newOffer);
     }
     @DeleteMapping("/{id}")
-    public void deleteOffer(@PathVariable String id){
+    public void deleteOffer(@PathVariable Long id){
         OfferService.deleteOffer(id);
     }
     @PutMapping("/{id}")
-    public Offer updateOffer(@RequestBody Offer offer,@PathVariable String id){
+    public Offer updateOffer(@RequestBody Offer offer,@PathVariable Long id){
         return offerService.updateOffer(id,offer);
     }
 }

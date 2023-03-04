@@ -3,7 +3,7 @@ spring:
     config:
       enabled: false
   datasource:
-    url: jdbc:mysql://localhost:8080/restaurant-service
+    url: jdbc:mysql://localhost:3306/restaurant-service
     username: root
     password: admin
     type: com.zaxxer.hikari.HikariDataSource
