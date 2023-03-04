@@ -4,6 +4,7 @@ import com.lixo.pos.model.FoodCategory;
 import com.lixo.pos.model.FoodCategory;
 import com.lixo.pos.service.FoodCategoryService;
 import com.lixo.pos.service.FoodCategoryService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +13,17 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/foodcategory")
+@RequestMapping("/api/food-category")
+@RequiredArgsConstructor
 public class FoodCategoryController {
-    @Autowired
-    private FoodCategoryService foodCategoryService;
 
-    @GetMapping(value = "/getfoodcategories")
+    private final FoodCategoryService foodCategoryService;
+
+    @GetMapping
     public List<FoodCategory> getAllFoodCategories() {
         return foodCategoryService.getAllFoodCategories();
     }
-    @GetMapping("/getfoodcategories/{id}")
+    @GetMapping("/{id}")
     public FoodCategory getFoodCategory(@PathVariable Long id) {
         return foodCategoryService.getFoodCategoryById(id);
     }

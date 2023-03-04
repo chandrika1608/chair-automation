@@ -3,6 +3,7 @@ package com.lixo.pos.controller;
 import com.lixo.pos.model.Kitchen;
 import com.lixo.pos.model.Restaurant;
 import com.lixo.pos.service.KitchenService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,15 +13,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/restaurants/{restaurantId}/kitchens/")
+@RequiredArgsConstructor
 public class KitchenController {
-    @Autowired
-    private KitchenService kitchenService;
 
-    @GetMapping("/get-all")
+    private final KitchenService kitchenService;
+
+    @GetMapping
     public List<Kitchen> getAllKitchen(@PathVariable Long restaurantId) {
         return kitchenService.getAllKitchens(restaurantId);
     }
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public Kitchen getKitchen(@PathVariable Long restaurantId,@PathVariable Long id) {
         return kitchenService.getKitchenById(restaurantId,id);
     }
@@ -36,7 +38,7 @@ public class KitchenController {
         kitchenService.deleteKitchen(restaurantId,id);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Kitchen> updateKitchen(@PathVariable Long restaurantId,@PathVariable Long id,@RequestBody Kitchen kitchen){
 
         Kitchen updatedKitchen= kitchenService.updateKitchen(restaurantId,id, kitchen);

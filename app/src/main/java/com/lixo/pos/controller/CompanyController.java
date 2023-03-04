@@ -16,11 +16,11 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @GetMapping(value = "/getcompanies")
+    @GetMapping
     public List<Company> getAllCompanies() {
         return companyService.getAllCompanies();
     }
-    @GetMapping("/getcompany/{id}")
+    @GetMapping("/{id}")
     public Company getCompany(@PathVariable Long id) {
         return companyService.getCompanyById(id);
     }

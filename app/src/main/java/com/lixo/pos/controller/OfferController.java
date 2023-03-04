@@ -4,36 +4,38 @@ import com.lixo.pos.model.Offer;
 import com.lixo.pos.model.Offer;
 import com.lixo.pos.service.OfferService;
 import com.lixo.pos.service.OfferService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/offer")
+@RequestMapping("/api/offer")
+@RequiredArgsConstructor
 public class OfferController {
-    @Autowired
-    private OfferService offerService;
 
-    @GetMapping(value = "/get-offer")
+    private final OfferService offerService;
+
+    @GetMapping
     public List<Offer> getAllOffer() {
         return offerService.getAllOffer();
     }
 
-    @GetMapping("offer/{id}")
+    @GetMapping("/{id}")
     public Offer getOffer(@PathVariable String id) {
         return offerService.getOfferById(id);
     }
 
-    @PostMapping("/save")
+    @PostMapping
     public Offer createOffer(@RequestBody Offer newOffer) {
         return offerService.createOffer(newOffer);
     }
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public void deleteOffer(@PathVariable String id){
         OfferService.deleteOffer(id);
     }
-    @PutMapping("update/{id}")
+    @PutMapping("/{id}")
     public Offer updateOffer(@RequestBody Offer offer,@PathVariable String id){
         return offerService.updateOffer(id,offer);
     }

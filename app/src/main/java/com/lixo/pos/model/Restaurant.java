@@ -36,8 +36,10 @@ public class Restaurant {
     @JoinColumn(name = "company_id")
     private Company company;
 
+
     public Restaurant(Long id) {
         this.id=id;
     }
+
     // ... getters and setters
 }
