@@ -4,6 +4,7 @@ import com.lixo.pos.exception.ResourceNotFoundException;
 import com.lixo.pos.model.MenuItem;
 import com.lixo.pos.model.Tax;
 import com.lixo.pos.repository.TaxRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +12,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class TaxService {
 
-    @Autowired
-    private static TaxRepository taxRepository;
+
+    private final TaxRepository taxRepository;
 
     public List<Tax> getAllTax(Long menuItemId) {
 

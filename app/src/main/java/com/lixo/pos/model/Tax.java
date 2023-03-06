@@ -20,7 +20,7 @@ public class Tax extends BaseEntity{
     private Long id;
     @NotEmpty(message = "Tax name is mandatory")
     private String name;
-    @NotEmpty(message = "Tax percentage name is mandatory")
+
     private float taxPercentage;
     private String status;
 
@@ -28,4 +28,8 @@ public class Tax extends BaseEntity{
     @JsonIgnore
     @JoinColumn(name = "menu_item_id")
     private  MenuItem menuItem;
+
+    public Tax(Long id) {
+        this.id = id;
+    }
 }
