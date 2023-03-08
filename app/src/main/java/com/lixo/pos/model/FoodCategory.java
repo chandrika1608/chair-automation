@@ -13,7 +13,7 @@ public class FoodCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotEmpty(message = "Kitchen name is mandatory")
+    @NotEmpty(message = "foodCategory name is mandatory")
     private String name;
     @JsonIgnore
     @OneToOne(mappedBy = "foodCategory")
