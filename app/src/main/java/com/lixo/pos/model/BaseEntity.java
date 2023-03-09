@@ -2,10 +2,13 @@ package com.lixo.pos.model;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.Instant;
 
-@Data
+@Getter
+@Setter
 @MappedSuperclass
 public class BaseEntity {
     private Instant createdDate;
@@ -14,6 +17,6 @@ public class BaseEntity {
 
     private Instant updatedDate;
 
-    private String updatedUser = "SYSTEM";
+    private String updatedUser = "System";
 }
 

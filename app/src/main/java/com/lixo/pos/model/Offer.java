@@ -18,9 +18,7 @@ public class Offer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
     private float percentage;
-
     private Long restaurantId;
     @JsonInclude(JsonInclude.Include.ALWAYS)
     private Instant fromDate;

@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/offer")
+@RequestMapping("/api/offers")
 @RequiredArgsConstructor
 public class OfferController {
 
@@ -29,7 +29,7 @@ public class OfferController {
     @PostMapping
     public ResponseEntity<Offer> addOffer(@RequestBody Offer offer) {
         Offer newOffer = offerService.createOffer(offer);
-        return ResponseEntity.created(URI.create("/api/offer/" + newOffer.getId()))
+        return ResponseEntity.created(URI.create("/api/offers/" + newOffer.getId()))
                 .body(newOffer);
     }
 
