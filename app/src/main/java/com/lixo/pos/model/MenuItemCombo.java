@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -11,6 +12,7 @@ import java.math.BigDecimal;
 @Entity
 @Setter
 @Getter
+@NoArgsConstructor
 public class MenuItemCombo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +24,18 @@ public class MenuItemCombo {
 
     @ManyToOne
     @JoinColumn(name = "combo_id")
+    @JsonIgnore
     private Combo combo;
 
     // ... other properties
 
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
+    @JsonIgnore
     private MenuItem menuItem;
 
     // ... getters and setters
+    public MenuItemCombo(Long id) {
+        this.id = id;
+    }
 }

@@ -9,25 +9,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/restaurants/{restaurantId}/combo/{comboId}/menu-items-combo")
+@RequestMapping("/api/restaurants/{restaurantId}/combo")
 @RequiredArgsConstructor
 public class MenuItemComboController {
 
     private final MenuItemComboService menuItemComboService;
 
-    @GetMapping
-    public List<MenuItemCombo> getAllMenuItemCombos(@PathVariable Long restaurantId) {
-        return menuItemComboService.getAllMenuItemCombos(restaurantId);
+   @GetMapping
+   public List<MenuItemCombo> getAllMenuItemCombosByComboId(@PathVariable Long restaurantId, @PathVariable Long comboId) {
+        return menuItemComboService.getMenuItemByRestaurantId(restaurantId);
+   }
+
+   @GetMapping("/{comboId}")
+    public MenuItemCombo getMenuItemComboByRestaurantIdAndComboId(@PathVariable Long restaurantId, @PathVariable Long comboId) {
+        return menuItemComboService.getMenuItemComboByRestaurantIdAndComboId(restaurantId, comboId);
     }
 
-    @GetMapping("/{id}")
-    public MenuItemCombo getMenuItemCombo(@PathVariable Long restaurantId, @PathVariable Long menuItemComboId) {
-        return menuItemComboService.getMenuItemComboById(restaurantId, menuItemComboId);
-    }
-
-    @PostMapping
+    @PostMapping("/{comboId}/menu-items-combo")
     public ResponseEntity<MenuItemCombo> addCombo(@PathVariable Long restaurantId,@PathVariable Long comboId , @RequestBody MenuItemCombo menuItemCombo) {
         MenuItemCombo comboItems = menuItemComboService.createMenuItemCombo(restaurantId,comboId, menuItemCombo);
         return ResponseEntity.created(URI.create("/api/MenuItemCombo/" + comboItems.getId()))
