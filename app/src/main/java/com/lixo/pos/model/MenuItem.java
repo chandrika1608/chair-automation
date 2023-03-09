@@ -36,7 +36,7 @@ public class MenuItem {
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-
+@JsonIgnore
     @OneToMany(mappedBy = "menuItem")
     private Set<MenuItemCombo> menuItemCombo;
 

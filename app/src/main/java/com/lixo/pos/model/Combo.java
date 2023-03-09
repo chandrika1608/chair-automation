@@ -29,7 +29,7 @@ public class Combo {
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "combo")
     private Set<MenuItemCombo> menuItems;
 

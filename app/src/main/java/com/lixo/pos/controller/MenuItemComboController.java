@@ -19,7 +19,7 @@ public class MenuItemComboController {
     private final MenuItemComboService menuItemComboService;
 
    @GetMapping
-   public List<MenuItemCombo> getAllMenuItemCombosByComboId(@PathVariable Long restaurantId, @PathVariable Long comboId) {
+   public List<MenuItemCombo> getAllMenuItemCombosByRestaurantId(@PathVariable Long restaurantId) {
         return menuItemComboService.getMenuItemByRestaurantId(restaurantId);
    }
 

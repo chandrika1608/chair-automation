@@ -24,14 +24,12 @@ public class MenuItemCombo {
 
     @ManyToOne
     @JoinColumn(name = "combo_id")
-    @JsonIgnore
     private Combo combo;
 
     // ... other properties
 
     @ManyToOne
     @JoinColumn(name = "menu_item_id")
-    @JsonIgnore
     private MenuItem menuItem;
 
     // ... getters and setters
