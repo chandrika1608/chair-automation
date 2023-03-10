@@ -10,7 +10,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/food-category")
+@RequestMapping("/api/food-categories")
 @RequiredArgsConstructor
 public class FoodCategoryController {
 

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/restaurants/{restaurantId}/combo")
+@RequestMapping("/api/restaurants/{restaurantId}/combos")
 @RequiredArgsConstructor
 public class MenuItemComboController {
 
