@@ -29,3 +29,10 @@ logging:
     org.springdoc: debug
 server:
   port: 8090
+  error:
+    whitelabel:
+      enabled: false
+  servlet:
+    contextPath: /restaurant-service
+  basic:
+    enabled: false
