@@ -1,0 +1,38 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  datasource:
+    url: jdbc:mysql://localhost:3306/restaurant-service
+    username: root
+    password: Admin@123
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      idle-timeout: 60000
+      max-lifetime: 1800000
+      minimum-idle: 1
+  jpa:
+    hibernate:
+      ddl-auto: update
+      order_inserts: true
+      generate_statistics: true
+eureka:
+  client:
+    enabled: false
+springdoc:
+  packages-to-scan: com.lixo.pos.controller
+logging:
+  level:
+    root: info
+    org.springdoc: debug
+server:
+  port: 8090
+  error:
+    whitelabel:
+      enabled: false
+  servlet:
+    contextPath: /restaurant-service
+  basic:
+    enabled: false
