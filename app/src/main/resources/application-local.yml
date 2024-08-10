@@ -3,7 +3,7 @@ spring:
     config:
       enabled: false
   datasource:
-    url: jdbc:mysql://localhost:3306/restaurant-service
+    url: jdbc:mysql://localhost:3306/chair-automation
     username: root
     password: Admin@123
     type: com.zaxxer.hikari.HikariDataSource
@@ -33,6 +33,6 @@ server:
     whitelabel:
       enabled: false
   servlet:
-    contextPath: /restaurant-service
+    contextPath: /chair-automation
   basic:
     enabled: false

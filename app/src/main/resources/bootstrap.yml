@@ -34,7 +34,7 @@
 #-------------------------------------------------------------------------------
 spring:
   application:
-    name: restaurant-service
+    name: chair-automation
   main:
     banner-mode: "off"
   cloud:

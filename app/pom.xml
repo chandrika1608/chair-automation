@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.lixo.pos</groupId>
-        <artifactId>restaurant-service-parent</artifactId>
+        <artifactId>chair-automation-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>restaurant-service</name>
-    <description>Restaurant service apis</description>
+    <name>chair-automation</name>
+    <description>Chair Automation apis</description>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>

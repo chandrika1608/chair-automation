@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.lixo.pos</groupId>
-	<artifactId>restaurant-service-parent</artifactId>
+	<artifactId>chair-automation-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>restaurant-service-parent</name>
-	<description>Restaurant service</description>
+	<name>chair-automation-parent</name>
+	<description>Chair Automation</description>
 	<modules>
 		<module>app</module>
 		<module>stubs</module>
